@@ -19,10 +19,10 @@ moment().format();
 var axios = require("axios");
 
 var command = process.argv[2];
-console.log(command);
+// console.log(command);
 
 var userInput = process.argv.slice(3).join(" ");
-console.log(userInput);
+// console.log(userInput);
 
 var output;
 
@@ -66,6 +66,63 @@ function BandInTownFunction() {
 
             }); // to close error 
 
+
+
+    } // to close response function
+
+        }; // to close band in town function
+
+
+
+
+
+
+
+
+
+/// function to look up movie on IMDB
+
+
+function ImdbFunction() {
+    var queryURL = "http://www.omdbapi.com/?t=" + userInput + "&y=&plot=short&apikey=trilogy";
+        if (userInput !== ""){
+        axios.get(queryURL).then(function (response) {
+            var movie = response.data;
+            // console.log(response.data);
+            
+            output = "\n---------------------\n" + ("Title of the movie: ") + movie.Title + ("\nYear: ") + movie.Year + ("\nIMDB Rating: ") + movie.imdbRating + ("\nRotten Tomatoes Rating: ") + movie.Ratings[1].Value + ("\nCountry: ") + movie.Country + ("\nLanguage: ") + movie.Language + ("\nPlot: ") + `${movie.Plot}\n` + ("\nActors: ") + movie.Actors;
+
+            console.log(output);
+            
+            }).catch(function (error) {
+                if (error.response) {
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    console.log(error.request);
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log("Error", error.message);
+                }
+                console.log(error.config);
+                
+
+            }); // to close error 
+
+        }
+        else {
+                var queryURL = "http://www.omdbapi.com/?t=" + "Mr.Nobody" + "&y=&plot=short&apikey=trilogy";
+                axios.get(queryURL).then(function(response){
+                    var movie = response.data;
+
+                    
+                output = "\n---------------------\n" + "Ooops! you forgot to put the name of the movie!Here is our recommendation" +("\nTitle of the movie: ") + movie.Title + ("\nYear: ") + movie.Year + ("\nIMDB Rating: ") + movie.imdbRating + ("\nRotten Tomatoes Rating: ") + movie.Ratings[1].Value + ("\nCountry: ") + movie.Country + ("\nLanguage: ") + movie.Language + ("\nPlot: ") + `${movie.Plot}\n` + ("\nActors: ") + movie.Actors;
+                    
+        
+                    console.log(output);
+                });
 
 
     } // to close response function
