@@ -127,20 +127,47 @@ function ImdbFunction() {
 
     } // to close response function
 
-        }; // to close band in town function
+        }; // to close band in IMDB function
 
 
 
 
 
 
-        // spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
-        //   if (err) {
-        //     return console.log('Error occurred: ' + err);
-        //   }
 
-        // console.log(data); 
-        // });
+
+
+        /// Spotify Function 
+
+
+    function SpotifyFuction() {
+        if(userInput !== ""){
+        spotify.search({ type: 'track', query: userInput }, function(err, data) {
+          if (err) {
+            return console.log('Error occurred: ' + err);
+          } // to close 2nd if
+          var song = data.tracks;
+
+            output = "\n--------------------------\n" + ("Artist(s): ") + song.items[0].artists[0].name + ("\nSong name: ") + song.items[0].name + ("\nSpotify Preview Link: ") + song.items[0].preview_url + ("\nSong Album: ") + song.items[0].album.name;
+
+            console.log(output);
+           
+        }) 
+    } // to close first if
+    else {
+            spotify.search({type: 'track', query: 'The Sign'}, function(err, data){
+                if (err){
+                    return console.log('Error occurred: ' + err);
+                }
+                var song = data.tracks;
+
+            output = "\n--------------------------\n" + ("Artist(s): ") + song.items[0].artists[0].name + ("\nSong name: ") + song.items[0].name + ("\nSpotify Preview Link: ") + song.items[0].preview_url + ("\nSong Album: ") + song.items[0].album.name;
+    
+                console.log(output);
+            });
+    }
+        
+    } // to close SpotifyFunction
 
 
         switch (command) {
