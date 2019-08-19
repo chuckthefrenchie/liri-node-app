@@ -170,6 +170,44 @@ function ImdbFunction() {
     } // to close SpotifyFunction
 
 
+
+
+    /// Do what it says function 
+
+
+    function doWhatItSays() {
+       
+    fs.readFile("random.txt", "utf8", function(err, data){
+        if (err) {
+            console.log("Error");
+        }  else{
+    
+    console.log(data); 
+    var output = data.split(",");
+    command = output[0];
+    userInput = output[1];   
+    switch (command) {
+        case "concert-this":
+            return BandInTownFunction();
+        case "movie-this":
+            return ImdbFunction();
+        case "spotify-this-song":
+            return SpotifyFuction();
+        
+    };
+        };
+        
+    }); // to close read File function
+
+        
+    } // to close Do what it says function
+
+
+
+
+
+
+
         switch (command) {
             case "concert-this":
                 return BandInTownFunction();
